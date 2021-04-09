@@ -1,13 +1,33 @@
 package com.mikael.bookstore.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Categoria {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+//Próxima linha identifica que a classe é uma tabela do banco
+@Entity
+public class Categoria implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
+	//Próximas duas linhas, primeiro é dito que o ID é a chave primária da tabela e o 
+	//GeneratedValue com essa strategy informa que ele vai ser auto incremento 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String descricao;
+	
+	//Cria o relacionamento com a classe livro 
+	@OneToMany(mappedBy = "categoria")
 	private List<Livro> livros = new ArrayList<>();
+	
 	public Categoria() {
 		super();
 	}
@@ -17,6 +37,7 @@ public class Categoria {
 		this.nome = nome;
 		this.descricao = descricao;
 	}
+	
 	
 	public Integer getId() {
 		return id;
