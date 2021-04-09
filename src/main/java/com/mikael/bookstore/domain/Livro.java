@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Livro implements Serializable {
 	
@@ -26,6 +28,9 @@ public class Livro implements Serializable {
 	//a ligação entre as duas classes ocorrem por meio do atributo categoria.
 	//A linha 30 cria uma chave estrangeira para fazer o relacionamento, guardar a chave primária
 	//da tabela categoria.
+	
+	@JsonIgnore //Esta anotação projete no get pra evitar serialização - loop infito de trazer as informações. Ou seja, ele não vai
+	//trazer a categoria quando fizer um get.
 	@ManyToOne
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
