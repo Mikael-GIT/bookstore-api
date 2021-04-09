@@ -34,6 +34,7 @@ public class DBService {
 		//inteira.
 		cat1.getLivros().addAll(Arrays.asList(l1,l2));
 		cat1.getLivros().addAll(Arrays.asList(l3,l4,l5));
+		
 		this.categoriaRepository.saveAll(Arrays.asList(cat1,cat2,cat3));
 		this.livroRepository.saveAll(Arrays.asList(l1,l2,l3,l4,l5));
 	}
