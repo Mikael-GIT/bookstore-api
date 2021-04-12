@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mikael.bookstore.domain.Categoria;
+import com.mikael.bookstore.exceptions.ObjectNotFoundException;
 import com.mikael.bookstore.repositories.CategoriaRepository;
 
 @Service
@@ -17,6 +18,6 @@ public class CategoriaService {
 		//O optional é para dar a opção de receber também um retorno nulo.
 		Optional<Categoria> obj = categoriaRepository.findById(id);
 		//Caso não encontre, retorne nulo.
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
 }
