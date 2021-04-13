@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.mikael.bookstore.domain.Categoria;
@@ -24,5 +25,10 @@ public class CategoriaService {
 	
 	public List<Categoria> findAll() {
 		return categoriaRepository.findAll();
+	}
+	
+	public Categoria create(Categoria obj) {
+		obj.setId(null);
+		return categoriaRepository.save(obj);
 	}
 }
